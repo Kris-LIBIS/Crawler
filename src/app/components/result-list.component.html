@@ -1,0 +1,15 @@
+<div *ngIf="results">
+  <p-dataTable #dt [value]="results" stickyHeader="true"
+               [rows]="20" [paginator]="true" [rowsPerPageOptions]="[10,15,20]"
+               selectionMode="single" [(selection)]="selectedResult">
+    <header>
+      <div class="ui-helper-clearfix">
+        <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()"
+                style="float:left"></button>
+      </div>
+    </header>
+    <p-column field="signature" header="Signature" [sortable]="true"></p-column>
+    <p-column field="pid" header="PID" [sortable]="true"></p-column>
+    <p-column field="alma_id" header="Alma ID" [sortable]="true"></p-column>
+  </p-dataTable>
+</div>
