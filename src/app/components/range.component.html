@@ -28,14 +28,15 @@
                pattern="\d+">
       </div>
       <div class="col-md-2">
-        <button class="btn btn-primary" type="submit">Search</button>
+        <button class="btn btn-primary" type="submit" [disabled]="count < max">Search</button>
       </div>
-      <div class="col-md-3">
-        <span>{{count}} / {{max}}<i *ngIf="count < max" class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span>
+      <div class="col-md-2">{{count}} / {{max}}</div>
+      <div class="col-md-1">
+        <i style="font-size: 1em;" *ngIf="count < max" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
       </div>
     </form>
   </div>
   <div class="row">
-    <crawl-result-list [results]="results"></crawl-result-list>
+    <crawl-result-list [results]="results" (sortEvent)="onSort($event)"></crawl-result-list>
   </div>
 </div>

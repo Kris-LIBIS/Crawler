@@ -12,7 +12,7 @@ export class ResolverService {
   }
 
   search(index, term): Observable<any> {
-    return this._http.get(this.url + '/r/search?query=' + index + '=' + term)
+    return this._http.get(this.url + '/r/search?query=' + index + '=' + term + '&step=100&start=1')
       .map(res => res.json() || {})
       .catch(this.handleError);
   }

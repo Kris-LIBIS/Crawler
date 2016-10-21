@@ -9,15 +9,15 @@
                 style="float:left"></button>
       </div>
     </header>
-    <p-column field="signature" header="Signature" [sortable]="true"></p-column>
-    <p-column field="pid" header="PID" [sortable]="true">
+    <p-column field="signature" header="Signature" [sortable]="'custom'" (sortFunction)="sort($event)"></p-column>
+    <p-column field="pid" header="PID" [sortable]="'custom'" (sortFunction)="sort($event)">
       <template let-col let-result="rowData" pTemplate type="body">
         <a *ngIf="result" [href]="'http://resolver.libis.be/'+result.pid+'/representation'" target="_blank">
           {{result.pid}}
         </a>
       </template>
     </p-column>
-    <p-column field="alma_id" header="Alma ID" [sortable]="true"></p-column>
+    <p-column field="alma_id" header="Alma ID" [sortable]="'custom'" (sortFunction)="sort($event)"></p-column>
   </p-dataTable>
   <p-contextMenu #cm [model]="menu_items"></p-contextMenu>
 </div>
