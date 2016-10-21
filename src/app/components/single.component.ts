@@ -1,7 +1,9 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {ResolverService} from "../services/resolver.service";
 import {Result} from "../shared/result.class";
+import {Subscription} from "rxjs";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'crawl-single',
@@ -12,20 +14,22 @@ import {Result} from "../shared/result.class";
     }
 `]
 })
-export class SingleComponent implements OnInit {
+export class SingleComponent implements OnInit, OnDestroy {
   results: Result[];
+  subscriptions: Subscription[];
 
   constructor(private resolver: ResolverService) {
   }
 
   ngOnInit() {
     this.results = [];
+    this.subscriptions = [];
   }
 
   onSubmit(form: NgForm) {
     const signature = form.value.signature;
     console.log(signature);
-    this.resolver.search('IE.dc.source', signature).subscribe(
+    this.subscriptions.push(this.resolver.search('IE.dc.source', signature).subscribe(
       (data) => {
         if (data.set.length == 0) {
           this.results.push(new Result(signature, {}));
@@ -34,7 +38,10 @@ export class SingleComponent implements OnInit {
         }
       },
           (error) => this.results.push(new Result(signature, {}))
-    );
+    ));
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 }

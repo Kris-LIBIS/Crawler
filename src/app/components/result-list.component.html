@@ -1,7 +1,8 @@
 <div *ngIf="results">
   <p-dataTable #dt [value]="results" stickyHeader="true"
                [rows]="20" [paginator]="true" [rowsPerPageOptions]="[10,15,20]"
-               selectionMode="single" [(selection)]="selectedResult">
+               selectionMode="single" [(selection)]="selectedResult"
+               [contextMenu]="cm">
     <header>
       <div class="ui-helper-clearfix">
         <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()"
@@ -9,7 +10,15 @@
       </div>
     </header>
     <p-column field="signature" header="Signature" [sortable]="true"></p-column>
-    <p-column field="pid" header="PID" [sortable]="true"></p-column>
+    <p-column field="pid" header="PID" [sortable]="true">
+      <template let-col let-result="rowData" pTemplate type="body">
+        <a *ngIf="result" [href]="'http://resolver.libis.be/'+result.pid+'/representation'" target="_blank">
+          {{result.pid}}
+        </a>
+      </template>
+    </p-column>
     <p-column field="alma_id" header="Alma ID" [sortable]="true"></p-column>
   </p-dataTable>
+  <p-contextMenu #cm [model]="menu_items"></p-contextMenu>
 </div>
+

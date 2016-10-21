@@ -11,6 +11,10 @@ import {RangeComponent} from "./components/range.component";
 import {ResolverService} from "./services/resolver.service";
 import {ResultListComponent} from "./components/result-list.component";
 import {DataTableModule} from "primeng/components/datatable/datatable";
+import {ContextMenuModule} from "primeng/components/contextmenu/contextmenu";
+import {SafePipe} from "./pipes/safe.pipe";
+import {ButtonModule} from "primeng/components/button/button";
+import {ProgressBarModule} from "primeng/components/progressbar/progressbar";
 
 @NgModule({
   declarations: [
@@ -19,14 +23,18 @@ import {DataTableModule} from "primeng/components/datatable/datatable";
     HomeComponent,
     SingleComponent,
     RangeComponent,
-    ResultListComponent
+    ResultListComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     routing,
-    DataTableModule
+    DataTableModule,
+    ContextMenuModule,
+    ButtonModule,
+    ProgressBarModule
   ],
   providers: [ResolverService],
   bootstrap: [AppComponent]

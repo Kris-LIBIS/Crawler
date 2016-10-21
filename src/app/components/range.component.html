@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
         <input class="form-control"
                type="text"
                placeholder="prefix"
@@ -16,7 +16,7 @@
                ngModel
                name="start_id"
                required
-                pattern="\d+">
+               pattern="\d+">
       </div>
       <div class="form-group col-md-2">
         <input class="form-control"
@@ -25,10 +25,13 @@
                ngModel
                name="end_id"
                required
-        pattern="\d+">
+               pattern="\d+">
       </div>
       <div class="col-md-2">
         <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+      <div class="col-md-3">
+        <span>{{count}} / {{max}}<i *ngIf="count < max" class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span>
       </div>
     </form>
   </div>
